@@ -3,7 +3,7 @@ args = {...}
 
 local move = require("utils.MovementManager")
 local trash = require("utils.TrashManager")
-local inventory = require("utils.InventryManager")
+local inventory = require("utils.InventoryManager")
 
 function digLayer(checkInv)
     local num = move.moveDown(1, true)
@@ -67,8 +67,7 @@ function quarry(x, y)
 
 	for dx=0,x do
     	for dy=0,y do
-       		--pillarDown(true)
-       		turtle.digDown()
+       		pillarDown(true)
         	if move.getY() + 5 > y then
             	local num = move.getY() - xPos[(move.getX()%5) + 1]
             	move.moveBack(num, true)
@@ -85,6 +84,7 @@ function main()
     --Sets ignore file
     trash.setTrashData("quarryIgnore")
     
+    -- -1 to prevent mining area outside of desired
     quarry(tonumber(args[1]-1), tonumber(args[2] -1))
     
     --Resets position back to start
